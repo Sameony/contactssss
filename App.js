@@ -10,7 +10,7 @@ function App(){
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Add Contact'>
+        <Stack.Navigator initialRouteName='Contacts'>
           <Stack.Screen name='Contacts' component={DisplayContacts} />
           <Stack.Screen name='Add Contact' component={AddContact} />
         </Stack.Navigator>

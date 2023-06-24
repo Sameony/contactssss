@@ -1,4 +1,4 @@
 import Header from "./Header";
 import Profile from "./Profile";
-
-export {Header, Profile}
+import ContactCard from "./ContactCard";
+export {Header, Profile, ContactCard}
