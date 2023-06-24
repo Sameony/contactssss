@@ -1,14 +1,21 @@
-
+// Router
 import React from 'react';
-import {Route, NativeRouter, Routes} from 'react-router-native'
-import Screen1 from './Screen1';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { AddContact, DisplayContacts } from './Screens';
 function App(){
+  
+  const Stack = createNativeStackNavigator();
   return (
-    <NativeRouter>
-      <Routes>
-        <Route path='/' Component={Screen1} />
-      </Routes>
-    </NativeRouter>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Add Contact'>
+          <Stack.Screen name='Contacts' component={DisplayContacts} />
+          <Stack.Screen name='Add Contact' component={AddContact} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

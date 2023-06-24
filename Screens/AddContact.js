@@ -4,7 +4,7 @@ const AddContact = () => {
   return (
     <View>
         <Text>
-        addition comp    
+          addition comp    
         </Text>
     </View>
   )
