@@ -3,7 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-import { AddContact, DisplayContacts } from './Screens';
+import { AddContact, DisplayContacts, Profile } from './Screens';
 import { MD3LightTheme as DefaultTheme,PaperProvider} from 'react-native-paper'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 function App(){
@@ -19,14 +19,15 @@ function App(){
   return (
     <PaperProvider theme={theme}>
         <SafeAreaProvider>
-        {/* <GestureHandlerRootView> */}
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <NavigationContainer>
             <Stack.Navigator initialRouteName='Contacts'>
               <Stack.Screen name='Contacts' component={DisplayContacts} />
               <Stack.Screen name='Add Contact' component={AddContact} />
+              <Stack.Screen name='View Contact' component={Profile} />
             </Stack.Navigator>
           </NavigationContainer>
-        {/* </GestureHandlerRootView> */}
+          </GestureHandlerRootView>
         </SafeAreaProvider>
       </PaperProvider>
   );

@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet} from 'react-native';
 import { Avatar } from 'react-native-paper';
 const Contact = ({contact}) => {
-  console.log(contact.thumbnailPath?contact.thumbnailPath:"hi")
+  console.log(contact,'\n------------------')
   return (
     <View style={styles.contactCon}>
       {!contact.hasThumbnail?<View style={styles.imgCon}>
@@ -11,7 +11,7 @@ const Contact = ({contact}) => {
         </View>
       </View>:<Avatar.Image size={60} source={{uri:contact.thumbnailPath}} />}
       <View style={styles.contactDat}>
-        <Text style={styles.name}>
+        <Text style={styles.name} >
           {contact?.givenName} {contact?.middleName && contact.middleName + ' '}
           {contact?.familyName}
         </Text>
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
+    width:"100%"
   },
   phoneNumber: {
     color: '#888',
