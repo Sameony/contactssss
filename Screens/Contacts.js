@@ -1,11 +1,9 @@
 import React from 'react'
-import {View, Text, Button, PermissionsAndroid} from 'react-native'
+import {View, Text, Button, PermissionsAndroid, FlatList} from 'react-native'
 import {useState, useEffect} from 'react'
 import Contacts from 'react-native-contacts'
-import { useIsFocused } from '@react-navigation/native';
 import { ContactCard } from '../Components';
 const DisplayContacts = ({History}) => {
-    
     const [contacts, setContacts] = useState([]);
     useEffect(()=>{
         getAllContacts();
@@ -17,7 +15,7 @@ const DisplayContacts = ({History}) => {
            );
            if(permission === 'granted') {
               const contacts = await Contacts.getAll();
-              console.log(contacts);
+            //   console.log(contacts);
               setContacts(contacts);
            }
         } catch (error) {
@@ -25,12 +23,11 @@ const DisplayContacts = ({History}) => {
         }
      }
   return (
-    <View>
-        {contacts?.map(ele=>{
-            return <ContactCard key={ele.rawContactId} name={ele.displayName}/>
-        })}
-        <Button title='to contact ' onPress={()=>{}}></Button>
-    </View>
+   <FlatList
+   data={contacts}
+   renderItem={({item, index}) =>  <ContactCard contact={item} />}
+   keyExtractor={(item, idx) =>  item?.recordID?.toString() || idx.toString()}
+   style={{flex:1}}/>
   )
 }
 
