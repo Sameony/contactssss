@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import Contacts from 'react-native-contacts'
 import { ContactCard } from '../Components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome';
 const DisplayContacts = ({navigation}) => {
     const [contacts, setContacts] = useState([]);
     useEffect(()=>{
@@ -24,6 +25,7 @@ const DisplayContacts = ({navigation}) => {
         }
      }
   return (
+  <>
    <FlatList
    data={contacts}
    renderItem={({item, index}) =>  <TouchableOpacity  onPress={() => navigation.navigate('View Contact', {
@@ -33,6 +35,10 @@ const DisplayContacts = ({navigation}) => {
    </TouchableOpacity>}
    keyExtractor={(item, idx) =>  item?.recordID?.toString() || idx.toString()}
    style={{flex:1}}/>
+   <View style={{position:"absolute", right:40, bottom:60}}>
+   <MaterialCommunityIcons onPress={()=>{navigation.navigate('Add Contact')}}  name="plus-circle" color={"#1E90ff"} size={70} />
+   </View>
+  </>
   )
 }
 
