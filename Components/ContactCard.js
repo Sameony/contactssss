@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet} from 'react-native';
 import { Avatar } from 'react-native-paper';
 const Contact = ({contact}) => {
-  console.log(contact,'\n------------------')
+  // console.log(contact,'\n------------------')
   return (
     <View style={styles.contactCon}>
       {!contact.hasThumbnail?<View style={styles.imgCon}>

@@ -1,20 +1,26 @@
 import React from 'react'
-import {View, Text, Button, PermissionsAndroid, FlatList} from 'react-native'
+import {View, PermissionsAndroid, FlatList} from 'react-native'
+import { useIsFocused } from '@react-navigation/native';
 import {useState, useEffect} from 'react'
 import Contacts from 'react-native-contacts'
 import { ContactCard } from '../Components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome';
 const DisplayContacts = ({navigation}) => {
+   const isFocused = useIsFocused();
     const [contacts, setContacts] = useState([]);
     useEffect(()=>{
         getAllContacts();
-    },[])
+    },[isFocused])
     async function getAllContacts() {
         try {
            const permission = await PermissionsAndroid.request(
               PermissionsAndroid.PERMISSIONS.READ_CONTACTS
            );
+           const permission2 = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
+         );
+         console.log(permission2)
            if(permission === 'granted') {
               const contacts = await Contacts.getAll();
             //   console.log(contacts);
