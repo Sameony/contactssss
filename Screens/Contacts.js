@@ -6,6 +6,7 @@ import Contacts from 'react-native-contacts'
 import { ContactCard } from '../Components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome';
+import { Searchbar } from 'react-native-paper';
 const DisplayContacts = ({navigation}) => {
    const isFocused = useIsFocused();
     const [contacts, setContacts] = useState([]);
@@ -30,8 +31,25 @@ const DisplayContacts = ({navigation}) => {
            console.log(error);
         }
      }
+     const searchContacts = async (text) =>{
+      const phoneNumberRegex = /\b[\+]?[(]?[0-9]{2,6}[)]?[-\s\.]?[-\s\/\.0-9]{3,15}\b/m;
+      if (text === "" || text === null) {
+         await getAllContacts();
+      } else if (phoneNumberRegex.test(text)) {
+        Contacts.getContactsByPhoneNumber(text).then(contactss => {
+          setContacts(contactss);
+        });
+      } else {
+        Contacts.getContactsMatchingString(text).then(contactss => {
+            setContacts( contactss);
+        });
+      }
+    }
   return (
   <>
+   <Searchbar
+          placeholder={"search"}
+          onChangeText={searchContacts}/>
    <FlatList
    data={contacts}
    renderItem={({item, index}) =>  <TouchableOpacity  onPress={() => navigation.navigate('View Contact', {
