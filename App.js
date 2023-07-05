@@ -3,9 +3,11 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-import { AddContact, DisplayContacts, Profile } from './Screens';
+import { AddContact, DisplayContacts, Favorites } from './Screens';
 import { MD3LightTheme as DefaultTheme,PaperProvider} from 'react-native-paper'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 function App(){
   const theme = {
     ...DefaultTheme
@@ -15,17 +17,42 @@ function App(){
     //   secondary: 'yellow',
     // },
   };
-  const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
+
   return (
     <PaperProvider theme={theme}>
         <SafeAreaProvider>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName='Contacts'>
-              <Stack.Screen name='Contacts' component={DisplayContacts} />
-              <Stack.Screen name='Add Contact' component={AddContact} />
-              <Stack.Screen name='View Contact' component={Profile} />
-            </Stack.Navigator>
+            <Tab.Navigator initialRouteName='Contacts' screenOptions={{
+              headerStyle: { backgroundColor: '#663399' },
+              headerTintColor: '#fff',
+              headerTitleStyle: { fontWeight: 'bold' },
+            }}>
+              <Tab.Screen name='Contacts' component={DisplayContacts} 
+              options={{
+                headerTitleAlign:"center",
+                tabBarLabel: 'Contacts',
+                tabBarStyle:{height:60},
+                tabBarActiveTintColor:"#663399",
+                tabBarLabelStyle:{fontSize:16, fontWeight:600},
+                tabBarIcon: ({ color, size,  }) => (
+                  <MaterialCommunityIcons name="phone" color={color} size={40} />
+                ),
+              }}/>
+              {/* <Tab.Screen name='Add Contact' component={AddContact} /> */}
+              <Tab.Screen name='Favorites' component={Favorites} 
+              options={{
+                tabBarStyle:{height:60},
+                headerTitleAlign:"center",
+                tabBarLabel: 'Favourites',
+                tabBarLabelStyle:{fontSize:16, fontWeight:600, color:"#808080"},
+                tabBarActiveTintColor:"#FDDC5C",
+                tabBarIcon: ({ color, size,  }) => (
+                  <MaterialCommunityIcons name="star" color={color} size={40} />
+                ),
+              }}/>
+            </Tab.Navigator>
           </NavigationContainer>
           </GestureHandlerRootView>
         </SafeAreaProvider>

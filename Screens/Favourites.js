@@ -7,10 +7,9 @@ import { ContactCard } from '../Components';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome';
 import { Searchbar } from 'react-native-paper';
-const DisplayContacts = ({navigation}) => {
+const Profile = ({navigation}) => {
    const isFocused = useIsFocused();
     const [contacts, setContacts] = useState([]);
-    const [contactCount, setContactCount] = useState([]);
     useEffect(()=>{
         getAllContacts();
     },[isFocused])
@@ -25,10 +24,8 @@ const DisplayContacts = ({navigation}) => {
          console.log(permission2)
            if(permission === 'granted') {
               const contacts = await Contacts.getAll();
-              const count = await Contacts.getCount()
-            //   console.log(contacts);
-              setContacts(contacts);
-              setContactCount(count)
+              setContacts(contacts.filter(e=>e.isStarred));
+                console.log(contacts.filter(e=>e.isStarred));
            }
         } catch (error) {
            console.log(error);
@@ -51,7 +48,7 @@ const DisplayContacts = ({navigation}) => {
   return (
   <>
    <Searchbar
-          placeholder={`Search in ${contactCount} Contacts`}
+          placeholder={"Search Favorites"}
           onChangeText={searchContacts}/>
    <FlatList
    data={contacts}
@@ -67,4 +64,4 @@ const DisplayContacts = ({navigation}) => {
   )
 }
 
-export default DisplayContacts
+export default Profile
