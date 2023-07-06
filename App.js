@@ -8,6 +8,7 @@ import { MD3LightTheme as DefaultTheme,PaperProvider} from 'react-native-paper'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import EditContacts from './Screens/EditContacts';
 function App(){
   const theme = {
     ...DefaultTheme
@@ -38,6 +39,28 @@ function App(){
                 tabBarLabelStyle:{fontSize:16, fontWeight:600},
                 tabBarIcon: ({ color, size,  }) => (
                   <MaterialCommunityIcons name="phone" color={color} size={40} />
+                ),
+              }}/>
+               <Tab.Screen name='AddUser' component={AddContact} 
+              options={{
+                headerTitleAlign:"center",
+                tabBarLabel: 'Add user',
+                tabBarStyle:{height:60},
+                tabBarActiveTintColor:"#663399",
+                tabBarLabelStyle:{fontSize:16, fontWeight:600},
+                tabBarIcon: ({ color, size,  }) => (
+                  <MaterialCommunityIcons name="plus" color={color} size={40} />
+                ),
+              }}/>
+               <Tab.Screen name='EditContacts' component={EditContacts} 
+              options={{
+                headerTitleAlign:"center",
+                tabBarLabel: 'edit user',
+                tabBarStyle:{height:60},
+                tabBarActiveTintColor:"#663399",
+                tabBarLabelStyle:{fontSize:16, fontWeight:600},
+                tabBarIcon: ({ color, size,  }) => (
+                  <MaterialCommunityIcons name="pencil" color={color} size={40} />
                 ),
               }}/>
               {/* <Tab.Screen name='Add Contact' component={AddContact} /> */}
