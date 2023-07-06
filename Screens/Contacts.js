@@ -29,34 +29,6 @@ import {
      });
    };
    console.log(userList)
-   let deleteUser = id => {
-     db.transaction(tx => {
-       tx.executeSql(
-         'DELETE FROM  table_user where user_id=?',
-         [id],
-         (tx, results) => {
-           console.log('Results', results.rowsAffected);
-           if (results.rowsAffected > 0) {
-             Alert.alert(
-               'Success',
-               'User deleted successfully',
-               [
-                 {
-                   text: 'Ok',
-                   onPress: () => {
-                     getData();
-                   },
-                 },
-               ],
-               {cancelable: false},
-             );
-           } else {
-             alert('Please insert a valid User Id');
-           }
-         },
-       );
-     });
-   };
    return (
      <View style={styles.container}>
        <FlatList
@@ -92,17 +64,6 @@ import {
                <Text style={styles.itemText}>{item.phone}</Text>
                {/* <Text style={styles.itemText}>{'Email: ' + item.email}</Text>
                <Text style={styles.itemText}>{'Address: ' + item.address}</Text> */}
-               <View style={styles.belowView}>
-                 <TouchableOpacity
-                   onPress={() => {
-                     deleteUser(item.user_id);
-                   }}>
-                   <Image
-                     source={require('../images/delete.png')}
-                     style={styles.icons}
-                   />
-                 </TouchableOpacity>
-               </View>
                </View>
              </TouchableOpacity>
            );
@@ -125,7 +86,7 @@ import {
      flex: 1,
    },
    addNewBtn: {
-     backgroundColor: 'purple',
+     backgroundColor: '#663399',
      width: 150,
      height: 50,
      borderRadius: 20,
